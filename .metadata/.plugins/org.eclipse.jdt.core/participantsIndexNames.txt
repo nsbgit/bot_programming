@@ -1,0 +1,3 @@
+INDEX VERSION 1.126
+D:\j2ee_workspace\bot_programming\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2122438625.index
+\bot\src

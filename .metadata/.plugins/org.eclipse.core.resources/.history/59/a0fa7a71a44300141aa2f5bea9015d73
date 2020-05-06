@@ -1,0 +1,51 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Enter passkey</title>
+</head>
+<body>
+	<h1 align="center">Enter Passkey</h1>
+	<form action="<%= request.getContextPath() %>/BS.do?linkId=2" method="post">
+		<table align="center">
+			<tr>
+				<td>Passkey</td>
+				<td><input type="text" name="semail" id="semail"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="Submit" align="middle">
+				</td>
+			</tr>
+			
+			<%
+				if(session.getAttribute("isTrue") != null) {%>
+					<br>
+					<br>
+					<tr>
+						<td colspan="2" align="center">
+							<font color="green"><b>Passkey Matched</b></font>
+							<% session.removeAttribute("isTrue"); %>
+						</td>
+					</tr>
+					
+			<%	}
+				else {%>
+					<br>
+					<br>
+					<tr>
+						<td colspan="2" align="center">
+							<font color="red"><b>Passkey doesn't matched</b></font>
+							<% session.removeAttribute("isTrue"); %>
+						</td>
+					</tr>
+			<%	}
+			%>
+		</table>
+	</form>
+
+</body>
+</html>

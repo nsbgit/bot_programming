@@ -1,0 +1,33 @@
+package logic;
+
+import java.util.Random;
+
+public class BOTLogic {
+	
+	
+	/****************	SEND MAIL	************************/
+	
+	/*************************************************/
+	
+	
+	
+	/***************	GENERATE PASSKEY	*********/
+	public static String createString() {
+		Random random = new Random();
+		
+		String alphabetString = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		
+		StringBuilder builder = new StringBuilder(alphabetString);
+		
+		char[] alphabet = builder.toString().toCharArray();
+		
+		StringBuilder generator = new StringBuilder();
+		
+		for(int i = 0; i<5; i++) {
+			generator.append(alphabet[random.nextInt(alphabet.length)]);
+		}
+		return null;
+	}
+	/****************************************/
+
+}

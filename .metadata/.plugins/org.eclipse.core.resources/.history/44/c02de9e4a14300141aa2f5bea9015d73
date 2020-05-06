@@ -1,0 +1,94 @@
+package controller;
+
+import java.io.IOException;
+
+import javax.mail.Session;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import logic.BOTLogic;
+
+import dto.Registration;
+
+/**
+ * Servlet implementation class BOTServlet
+ */
+public class BOTServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private final int REGISTER = 1;
+	private final int CHECK = 2;
+	private int linkId;
+	private Registration registration;
+	private String pkey;
+	private HttpSession session;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public BOTServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		this.commonMethod(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		this.commonMethod(request, response);
+	}
+
+	private void commonMethod(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		linkId = Integer.parseInt(request.getParameter("linkId"));
+		
+		switch (linkId) {
+		case REGISTER:
+			
+			try {
+				registration = new Registration();
+				pkey = BOTLogic.createPassKey();
+				
+				registration.setSemail(request.getParameter("semail"));
+				registration.setSpass(request.getParameter("spass"));
+				registration.setRemail(request.getParameter("remail"));
+				registration.setRpass(pkey);
+				
+				boolean isSend = new BOTLogic().sendInfo(registration);
+				
+				if (isSend) {
+					session = request.getSession();
+					session.setAttribute("pkey", pkey);
+					
+					response.sendRedirect("pkey.jsp");
+				} else {
+
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			break;
+			
+		case CHECK:
+			
+			break;
+
+		default:
+			break;
+		}
+	}
+
+}
